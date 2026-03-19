@@ -4,18 +4,19 @@
 #include <string.h>
 
 
+
 int err (int code, char *str);
 int sign (int integer);
 long double add (long double addend0, long double addend1);
 long double sub (long double minuend, long double subtrahend);
 long double mul (long double factor0, long double factor1);
 long double divide (long double dividend, long double divisor);
-long double root (int iterations);
+long double root (long double base, long double index);
 long double expon (long double base, int order);
 
 int main (int argc, char *argv[]) {
 
-    const char *yucky = argv[0];
+    const char *yucky = argv[1];
     char *endptr1;
     char *endptr2;
     long double funky;
@@ -33,15 +34,57 @@ int main (int argc, char *argv[]) {
         gnarly = strtold(argv[3], &endptr2);
 
     }
+
     
-    if (strcmp(yucky, "exp") == 0) {
+    
+    if (strcmp(yucky, "add") == 0) {
+
+        temp = add(funky, gnarly);
+
+        printf("\nThe sum of %s and %s is: ", argv[2], argv[3]);
+        printf("|:%Lf:|\n", temp);
+        return 0;
+
+    } else if (strcmp(yucky, "sub") == 0) {
+
+        temp = sub(funky, gnarly);
+
+        printf("\nThe difference between %s and %s is: ", argv[2], argv[3]);
+        printf("|:%Lf:|\n", temp);
+        return 0;
+
+    } else if (strcmp(yucky, "mul") == 0) {
+
+        temp = mul(funky, gnarly);
+
+        printf("\nThe product of %s and %s is: ", argv[2], argv[3]);
+        printf("|:%Lf:|\n", temp);
+        return 0;
+
+    } else if (strcmp(yucky, "div") == 0) {
+
+        temp = divide(funky, gnarly);
+
+        printf("\nThe quotient of %s and %s is: ", argv[2], argv[3]);
+        printf("|:%Lf:|\n", temp);
+        return 0;
+
+    } else if (strcmp(yucky, "root") == 0) {
+
+        temp = root(funky, gnarly);
+
+        printf("\nThe %sa root of %s is: ", argv[3], argv[2]);
+        printf("|:%Lf:|\n", temp);
+        return 0;
+
+    } else if (strcmp(yucky, "exp") == 0) {
 
         temp = expon(funky, gnarly);
 
-        printf("\n%s raised to the power of %s is:\n", argv[2], argv[3]);
+        printf("\n%s raised to the power of %s is: ", argv[2], argv[3]);
         printf("|:%Lf:|\n", temp);
-        printf("%d", strcmp(yucky, "exp"));
         return 0;
+
     }
 
 
@@ -63,7 +106,31 @@ int sign (int integer) {
     } else return 1;
 }
 
-long double root (int iterations) {
+long double add(long double addend0, long double addend1) {
+
+    return (addend0 + addend1);
+
+}
+
+long double sub (long double minuend, long double subtrahend) {
+
+    return (minuend - subtrahend);
+
+}
+
+long double mul (long double factor0, long double factor1) {
+
+    return (factor0 * factor1);
+
+}
+
+long double divide (long double dividend, long double divisor) {
+
+    return (dividend / divisor);
+
+}
+
+long double root (long double base, long double index) {
 
     long double ptr = 1;
     long double cur;
@@ -72,13 +139,13 @@ long double root (int iterations) {
 
     while (!done) {
     
-    cur = 2 / ptr;
+    cur = base / ptr;
     cur += ptr;
-    cur /= 2;
+    cur /= index;
     ptr = cur;
 
     ticker += 1;
-    if (ticker == iterations) {
+    if (ticker == 30) {
         done = true;
     }
 

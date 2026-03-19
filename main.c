@@ -5,22 +5,24 @@
 
 
 
-int err (int code, char *str);
-int sign (int integer);
+int err (int code, char *str); // Error code function, prints given string and returns given code
+int sign (int integer); // determines the sign of an integer
 long double add (long double addend0, long double addend1);
 long double sub (long double minuend, long double subtrahend);
 long double mul (long double factor0, long double factor1);
 long double divide (long double dividend, long double divisor);
 long double root (long double base, long double index);
 long double expon (long double base, int order);
-int run (char *a[]);
+int run (char *a[]); // Completes and prints given operation
 
 int main (int argc, char *argv[]) {
 
     const char *yucky = argv[1];
     char *smelly;
     bool done = false;
-    char *a[] = {argv[1], argv[2], argv[3]};
+    
+    char *a[6] = {NULL};
+
     bool persistant = false;
     char buffer[128];
     bool skip = false;
@@ -36,7 +38,7 @@ int main (int argc, char *argv[]) {
 
         persistant = true;
         skip = true;
-        
+
     }
 
     if (argc < 3 && !skip) {
@@ -66,8 +68,11 @@ int main (int argc, char *argv[]) {
     while (!done) {
 
         if (!skip) {
-
+            a[0] = argv[1];
+            a[1] = argv[2];
+            a[2] = argv[3];
             works = run(a);
+            printf("%d", works); //temp
             skip = false;
 
         }
@@ -107,7 +112,9 @@ int main (int argc, char *argv[]) {
         printf("\n> ");
 
         fgets(buffer, sizeof(buffer), stdin);
-        sscanf(buffer, "%s %s %s", a[0], a[1], a[2]);
+        sscanf(buffer, "%49s %49s %49s", a[0], a[1], a[2]);
+
+        skip = false;
 
     }
 
@@ -201,12 +208,13 @@ int run (char *a[]) {
     char *endptr2;
     char *yucky;
     long double funky;
-    long double gnarly;    
+    long double gnarly;
     long double temp;
 
-    if (a[0] != NULL) {
+    if (a[0][0] !== "\0") {
 
         yucky = a[0];
+        printf("%s", yucky); //temp
 
     } else {
 

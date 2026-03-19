@@ -1,0 +1,6 @@
+0: Success
+1: General Error
+2: Operation specified is not defined
+3: No operation specified
+4: Not enough arguments were passed
+5: a[0] string copy failure

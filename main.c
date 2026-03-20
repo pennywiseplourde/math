@@ -21,7 +21,7 @@ int main (int argc, char *argv[]) {
     char *smelly;
     bool done = false;
     
-    char *a[6] = {NULL};
+    char a[6][50];
 
     bool persistant = false;
     char buffer[128];
@@ -109,8 +109,7 @@ int main (int argc, char *argv[]) {
 
         }
 
-        printf("\n> ");
-
+        printf("\n> "); 
         fgets(buffer, sizeof(buffer), stdin);
         sscanf(buffer, "%49s %49s %49s", a[0], a[1], a[2]);
 
@@ -211,7 +210,7 @@ int run (char *a[]) {
     long double gnarly;
     long double temp;
 
-    if (a[0][0] !== "\0") {
+    if (a[0][0] != '\0') {
 
         yucky = a[0];
         printf("%s", yucky); //temp
